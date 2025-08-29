@@ -2,7 +2,7 @@ import os
 
 
 def add_new_player(player_id, day) -> list:
-    # player_dict{'name' : [id, attendance[사용자ID][요일], point, grade]
+    # player_dict{'name' : [id, attendance[요일], point, grade]}
     new_player_data = [player_id, [0] * 7, 0, 0]
     return update_player(new_player_data, day)
 
