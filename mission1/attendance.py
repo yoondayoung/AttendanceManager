@@ -1,5 +1,7 @@
 import os
 
+BONUS_POINT = 10
+DAYS_MIN_FOR_BONUS_POINT = 10
 
 def add_new_player(day) -> list:
     # player_dict{'name' : [attendance[요일], point, grade]}
@@ -73,9 +75,9 @@ def print_attendance_system(file):
 
     for name, data in player_dict.items():
         player_dict[name][1] += calculate_player_bonus_points(player_dict[name])
-        player_dict[name][2] = get_player_grade(player_dict[name][2])
+        player_dict[name][2] = get_player_grade(player_dict[name][1])
 
-        print_grade(name, player_dict[name][1], player_dict[name][2])
+        print_player(name, player_dict[name][1], player_dict[name][2])
 
     print_removed_player(player_dict)
 
@@ -91,10 +93,10 @@ def get_player_grade(player_point):
 
 def calculate_player_bonus_points(player_data):
     bonus_point = 0
-    if player_data[0][2] > 9:
-        bonus_point += 10
-    if get_player_weekend_attendance(player_data) > 9:
-        bonus_point += 10
+    if player_data[0][2] >= DAYS_MIN_FOR_BONUS_POINT:
+        bonus_point += BONUS_POINT
+    if get_player_weekend_attendance(player_data) >= DAYS_MIN_FOR_BONUS_POINT:
+        bonus_point += BONUS_POINT
     return bonus_point
 
 
@@ -114,7 +116,7 @@ def is_player_removed(player_data):
     return player_data[2] not in (1, 2) and player_data[0][2] == 0 and get_player_weekend_attendance(player_data) == 0
 
 
-def print_grade(player_name, player_point, player_grade):
+def print_player(player_name, player_point, player_grade):
     print(f"NAME : {player_name}, POINT : {player_point}, GRADE : {get_grade_name(player_grade)}")
 
 

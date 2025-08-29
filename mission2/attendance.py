@@ -1,7 +1,3 @@
-# D2 - Regression Test를 위한 Unit Test 개발
-# D3 – 확장성을 고려한 설계, 정책과 등급이 추가되더라도 Client Code에 변경이 없도록 한다.
-# D4 - 리팩토링에 디자인 패턴을 적용한다.
-# D5 - 리팩토링이 끝난 코드에, 코드 커버리지가 100% 되어야 한다
 import os
 
 from mission2.player import Player
@@ -9,6 +5,7 @@ from mission2.player import Player
 
 class AttendanceSystem(object):
     def __new__(cls):
+        # singleton
         if not hasattr(cls, 'instance'):
             cls.instance = super(AttendanceSystem, cls).__new__(cls)
         cls.players_ = {}
