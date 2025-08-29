@@ -1,1 +1,4 @@
 .idea
+pytest.ini
+.coverage
+.htmlcov
